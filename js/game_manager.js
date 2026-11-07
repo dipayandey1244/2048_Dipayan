@@ -148,6 +148,7 @@ GameManager.prototype.setBoardSize = function (size) {
   size = parseInt(size, 10);
   if ([4, 5, 6].indexOf(size) === -1) return;
   this.size = size;
+  try { window.localStorage.setItem("flux-board-size", String(size)); } catch (error) {}
   this.history = [];
   this.storageManager.clearGameState();
   this.actuator.continueGame();
@@ -165,6 +166,7 @@ GameManager.prototype.startDailyChallenge = function () {
   };
   this.dailyChallenge = true;
   this.size = 4;
+  try { window.localStorage.setItem("flux-board-size", "4"); } catch (error) {}
   this.history = [];
   this.storageManager.clearGameState();
   this.actuator.continueGame();
