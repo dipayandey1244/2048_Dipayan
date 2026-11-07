@@ -131,25 +131,25 @@ test("a merge to 2048 marks the game as won", () => {
   assert.equal(manager.score, 2048);
 });
 
-test("a full board with no adjacent matches is game over", () => {
-  const { manager } = createManager(4, [0, 0]);
+test("the game ends when a move fills the last cell without creating a merge", () => {
+  const { manager, storage } = createManager(4, [0.95, 0]);
   const pattern = [
-    [2, 4, 2, 4],
-    [4, 2, 4, 2],
-    [2, 4, 2, 4],
-    [4, 2, 4, 2]
+    [null, 8, 2, 8],
+    [4, 2, 8, 2],
+    [2, 8, 4, 8],
+    [8, 2, 8, 4]
   ];
   pattern.forEach((row, y) => row.forEach((value, x) => {
-    manager.grid.insertTile(new Tile({ x, y }, value));
+    if (value !== null) manager.grid.insertTile(new Tile({ x, y }, value));
   }));
-  assert.equal(manager.movesAvailable(), false);
-  manager.storageManager.setGameState(manager.serialize());
-  manager.over = true;
-  manager.actuate();
-  assert.equal(manager.storageManager.getGameState(), null);
-  assert.equal(manager.over, true);
-});
 
+  assert.equal(manager.movesAvailable(), true);
+  manager.move(3);
+
+  assert.equal(manager.movesAvailable(), false);
+  assert.equal(manager.over, true);
+  assert.equal(storage.getGameState(), null);
+});
 test("game state serialization preserves grid, score and terminal flags", () => {
   const { manager } = createManager(4, [0, 0]);
   place(manager, [[1, 2, 16]]);
