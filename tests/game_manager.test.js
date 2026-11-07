@@ -58,9 +58,9 @@ function place(manager, entries) {
 }
 
 function values(manager) {
-  return manager.grid.cells.map((column) =>
+  return JSON.parse(JSON.stringify(manager.grid.cells.map((column) =>
     column.map((tile) => tile ? tile.value : 0)
-  );
+  )));
 }
 
 test("new game starts with two tiles and deterministic values", () => {
@@ -135,9 +135,10 @@ test("a full board with no adjacent matches is game over", () => {
     manager.grid.insertTile(new Tile({ x, y }, value));
   }));
   assert.equal(manager.movesAvailable(), false);
+  manager.storageManager.setGameState(manager.serialize());
   manager.over = true;
   manager.actuate();
-  assert.equal(manager.storageManager, undefined);
+  assert.equal(manager.storageManager.getGameState(), null);
   assert.equal(manager.over, true);
 });
 
