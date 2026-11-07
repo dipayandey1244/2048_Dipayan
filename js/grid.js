@@ -34,11 +34,11 @@ Grid.prototype.fromState = function (state) {
 };
 
 // Find the first available random position
-Grid.prototype.randomAvailableCell = function () {
+Grid.prototype.randomAvailableCell = function (random) {
   var cells = this.availableCells();
 
   if (cells.length) {
-    return cells[Math.floor(Math.random() * cells.length)];
+    return cells[Math.floor((random || Math.random)() * cells.length)];
   }
 };
 
