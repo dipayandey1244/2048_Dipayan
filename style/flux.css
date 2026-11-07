@@ -12,8 +12,8 @@ h1.title span { color:var(--flux-accent); }
 .scores-container { float:none; display:flex; gap:7px; }
 .score-container,.best-container { margin:0; min-width:58px; padding:10px 13px; height:32px; line-height:38px; border-radius:12px; background:var(--flux-panel); color:var(--flux-text); border:1px solid var(--flux-border); font-size:20px; }
 .score-container:after,.best-container:after { top:5px; color:var(--flux-muted); font-size:9px; letter-spacing:.12em; }
-.score-container:after { content:attr(data-label,"SCORE"); }
-.best-container:after { content:attr(data-label,"BEST"); }
+.score-container:after { content:attr(data-label); }
+.best-container:after { content:attr(data-label); }
 .tagline { color:var(--flux-muted); margin:8px 0 0; font-size:14px; }
 .flux-toolbar { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:18px 0 10px; }
 .flux-toolbar label { display:flex; flex-direction:column; gap:6px; color:var(--flux-muted); font-size:9px; font-weight:800; letter-spacing:.12em; }
