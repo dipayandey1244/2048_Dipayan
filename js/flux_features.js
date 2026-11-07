@@ -12,13 +12,14 @@
   function safeGet(key,fallback){try{return JSON.parse(localStorage.getItem(key))||fallback;}catch(e){return fallback;}}
   function safeSet(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}}
   function formatNumber(value){
-    var locale=currentLanguage==="hi"?"hi-IN-u-nu-deva":currentLanguage==="bn"?"bn-BD-u-nu-beng":currentLanguage==="ja"?"ja-JP-u-nu-fullwide":currentLanguage==="fr"?"fr-FR":currentLanguage==="es"?"es-ES":"en-US";
-    try {
-      return new Intl.NumberFormat(locale,{useGrouping:false,maximumFractionDigits:0}).format(Number(value));
-    } catch(error) {
-      var digits=currentLanguage==="hi"?"०१२३४५६७८९":currentLanguage==="bn"?"০১২৩৪৫৬৭৮৯":null;
-      return digits ? String(value).replace(/[0-9]/g,function(d){return digits[Number(d)];}) : String(value);
-    }
+    var text=String(Math.trunc(Number(value)));
+    var digits={
+      hi:"०१२३४५६७८९",
+      bn:"০১২৩৪৫৬৭৮৯",
+      ja:"０１２３４５６７８９"
+    }[currentLanguage];
+    if(!digits)return text;
+    return text.replace(/[0-9]/g,function(d){return digits.charAt(Number(d));});
   }
   function applyLanguage(code){
     currentLanguage=translations[code]?code:"en";
