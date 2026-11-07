@@ -1,0 +1,12 @@
+{
+  "name": "2048-flux",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A browser-based evolution of the original 2048 game.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

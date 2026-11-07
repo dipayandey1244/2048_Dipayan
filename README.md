@@ -36,3 +36,20 @@ You can find the same information in the [contributing guide.](https://github.co
 
 ## Donations
 I made this in my spare time, and it's hosted on GitHub (which means I don't have any hosting costs), but if you enjoyed the game and feel like buying me coffee, you can donate at my BTC address: `1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i`. Thank you very much!
+
+## Local development
+
+The game is a static HTML/CSS/JavaScript application and does not require a
+bundler. Open `index.html` in a browser or serve the repository root with a
+static file server.
+
+### Tests
+
+Node.js 18 or later is required for the built-in test runner:
+
+```sh
+npm test
+```
+
+The game engine tests run without a browser and use an injected random-number
+source so tile generation is reproducible.
