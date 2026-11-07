@@ -96,3 +96,36 @@ body.theme-classic .tile.tile-512 .tile-inner { background:#edc850; color:#f9f6f
 body.theme-classic .tile.tile-1024 .tile-inner { background:#edc53f; color:#f9f6f2; }
 body.theme-classic .tile.tile-2048 .tile-inner { background:#edc22e; color:#f9f6f2; }
 body.theme-classic .tile.tile-super .tile-inner { background:#3c3a32; color:#f9f6f2; }
+
+
+/* Restore the original 2048 visual language when Classic is selected. */
+body.theme-classic {
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  padding: 40px 18px;
+}
+body.theme-classic .container.flux-shell { width: min(100%, 500px); }
+body.theme-classic h1.title {
+  color: #776e65; font-size: clamp(48px, 11vw, 80px);
+  font-weight: 700; letter-spacing: -0.04em;
+}
+body.theme-classic h1.title span { color: #776e65; }
+body.theme-classic .tagline, body.theme-classic .game-intro { color: #776e65; }
+body.theme-classic .game-container {
+  border: 0; border-radius: 6px; padding: 12px;
+  background: #bbada0; box-shadow: none;
+}
+body.theme-classic .grid-cell { border-radius: 3px; }
+body.theme-classic .tile .tile-inner { border-radius: 3px; font-weight: 700; }
+body.theme-classic .flux-toolbar select,
+body.theme-classic .flux-actions button,
+body.theme-classic .flux-panel {
+  border-radius: 3px; box-shadow: none;
+}
+body.theme-classic .restart-button,
+body.theme-classic .game-container .game-message a { border-radius: 3px; }
+body.theme-classic .flux-panel { background: #eee4da; }
+body.theme-classic .flux-panel h2 { color: #776e65; }
+@media (max-width: 520px) {
+  body.theme-classic { padding: 20px 14px; }
+  body.theme-classic .container.flux-shell { width: 100%; }
+}
