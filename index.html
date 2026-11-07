@@ -1,90 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>2048</title>
-
+  <title>2048 FLUX — Built with curiosity by Dipayan</title>
+  <meta name="description" content="2048 FLUX — a curious, playful take on the classic number puzzle.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101522">
   <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link href="style/flux.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"  media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone, retina -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
-<body>
-  <div class="container">
-    <div class="heading">
-      <h1 class="title">2048</h1>
-      <div class="scores-container">
-        <div class="score-container">0</div>
-        <div class="best-container">0</div>
+<body class="theme-neon">
+  <main class="container flux-shell">
+    <header class="flux-header">
+      <p class="built-by">BUILT WITH CURIOSITY BY <strong>DIPAYAN</strong></p>
+      <div class="heading">
+        <h1 class="title">2048 <span>FLUX</span></h1>
+        <div class="scores-container">
+          <div class="score-container" aria-label="Score">0</div>
+          <div class="best-container" aria-label="Best score">0</div>
+        </div>
       </div>
-    </div>
+      <p class="tagline" data-i18n="tagline">A little curiosity. A lot of strategy.</p>
+    </header>
+
+    <section class="flux-toolbar" aria-label="Game settings">
+      <label><span data-i18n="board">BOARD</span>
+        <select id="board-size" aria-label="Board size">
+          <option value="4">4 × 4</option><option value="5">5 × 5</option><option value="6">6 × 6</option>
+        </select>
+      </label>
+      <label><span data-i18n="language">LANGUAGE</span>
+        <select id="language" aria-label="Language">
+          <option value="en">English</option><option value="hi">हिन्दी</option><option value="bn">বাংলা</option>
+          <option value="es">Español</option><option value="fr">Français</option><option value="ja">日本語</option>
+        </select>
+      </label>
+      <label><span data-i18n="theme">THEME</span>
+        <select id="theme" aria-label="Theme">
+          <option value="neon">Neon dark</option><option value="light">Light</option><option value="pastel">Pastel</option><option value="vibrant">Vibrant</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="flux-actions" aria-label="Game actions">
+      <button id="undo-button" type="button" data-i18n="undo">↶ Undo</button>
+      <button id="hint-button" type="button" data-i18n="hint">✦ Hint</button>
+      <button id="daily-button" type="button" data-i18n="daily">☀ Daily challenge</button>
+      <button id="sound-button" type="button" aria-pressed="false" data-i18n="soundOff">♫ Sound off</button>
+    </section>
+    <p id="flux-status" class="flux-status" aria-live="polite"></p>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro" data-i18n="intro">Join the numbers and reach the <strong>2048 tile!</strong></p>
+      <a class="restart-button" data-i18n="newGame">New game</a>
     </div>
 
-    <div class="game-container">
+    <section class="game-container" aria-label="2048 game board">
       <div class="game-message">
         <p></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+          <a class="keep-playing-button" data-i18n="keepGoing">Keep going</a>
+          <a class="retry-button" data-i18n="tryAgain">Try again</a>
         </div>
       </div>
+      <div class="grid-container" aria-hidden="true"></div>
+      <div class="tile-container" aria-live="polite"></div>
+    </section>
 
-      <div class="grid-container">
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
+    <section class="flux-panels">
+      <div class="flux-panel">
+        <h2 data-i18n="achievements">Achievements</h2>
+        <ul id="achievement-list"><li>First move — start playing</li></ul>
       </div>
-
-      <div class="tile-container">
-
+      <div class="flux-panel">
+        <h2 data-i18n="leaderboard">Personal leaderboard</h2>
+        <ol id="leaderboard-list"><li>Your best runs will appear here</li></ol>
       </div>
-    </div>
+    </section>
 
-    <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+    <p class="game-explanation" data-i18n="howTo">
+      <strong class="important">How to play:</strong> Use your arrow keys or swipe to move. Matching tiles merge into one. Reach 2048!
     </p>
-    <hr>
-    <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
-    </p>
-    <hr>
-    <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
-    </p>
-  </div>
-
+    <footer class="flux-footer">
+      <span>2048 FLUX</span><span>Built with curiosity by Dipayan</span>
+      <span>Based on the original 2048 by Gabriele Cirulli · MIT License</span>
+    </footer>
+  </main>
   <script src="js/bind_polyfill.js"></script>
   <script src="js/classlist_polyfill.js"></script>
   <script src="js/animframe_polyfill.js"></script>
@@ -95,5 +98,6 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+  <script src="js/flux_features.js"></script>
 </body>
 </html>
