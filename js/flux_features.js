@@ -62,7 +62,7 @@
     init:function(instance){
       game=instance;
       var lang=safeGet("flux-language","en");
-      var theme=safeGet("flux-theme","neon");
+      var theme=safeGet("flux-theme","classic");
       byId("language").value=lang;byId("theme").value=theme;byId("board-size").value=String(game.size);
       document.body.className="theme-"+theme;applyLanguage(lang);renderLists();
       byId("language").addEventListener("change",function(){applyLanguage(this.value);});
