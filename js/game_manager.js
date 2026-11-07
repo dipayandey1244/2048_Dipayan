@@ -12,7 +12,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, random) {
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
-};
+}
 
 // Restart the game
 GameManager.prototype.restart = function () {
