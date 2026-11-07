@@ -12,7 +12,7 @@ const context = vm.createContext({ Math, JSON });
 
 const { GameManager, Grid, Tile } = context;
 
-function createManager(size = 4, randomValues = []) {
+function createManager(size = 4, randomValues = [], emptyBoard = true) {
   let randomIndex = 0;
   const random = () => {
     const value = randomValues[randomIndex];
@@ -43,11 +43,13 @@ function createManager(size = 4, randomValues = []) {
   const manager = new GameManager(
     size, InputManager, Actuator, StorageManager, random
   );
-  manager.grid = new Grid(size);
-  manager.score = 0;
-  manager.over = false;
-  manager.won = false;
-  manager.keepPlaying = false;
+  if (emptyBoard) {
+    manager.grid = new Grid(size);
+    manager.score = 0;
+    manager.over = false;
+    manager.won = false;
+    manager.keepPlaying = false;
+  }
   return { manager, storage, actuator };
 }
 
@@ -63,8 +65,14 @@ function values(manager) {
   )));
 }
 
+function rowValues(manager, y = 0) {
+  return manager.grid.cells.map((column) =>
+    column[y] ? column[y].value : 0
+  );
+}
+
 test("new game starts with two tiles and deterministic values", () => {
-  const { manager } = createManager(4, [0.95, 0, 0, 0]);
+  const { manager } = createManager(4, [0.95, 0, 0, 0], false);
   const occupied = manager.grid.availableCells().length;
   assert.equal(occupied, 14);
   const tiles = [];
@@ -76,7 +84,7 @@ test("left move combines equal adjacent tiles and scores the merge", () => {
   const { manager } = createManager(4, [0, 0]);
   place(manager, [[0, 0, 2], [1, 0, 2], [2, 0, 2]]);
   manager.move(3);
-  assert.deepEqual(values(manager)[0], [4, 2, 0, 0]);
+  assert.deepEqual(rowValues(manager), [4, 2, 2, 0]);
   assert.equal(manager.score, 4);
 });
 
@@ -84,7 +92,7 @@ test("a newly merged tile cannot merge twice in one move", () => {
   const { manager } = createManager(4, [0, 0]);
   place(manager, [[0, 0, 2], [1, 0, 2], [2, 0, 4]]);
   manager.move(3);
-  assert.deepEqual(values(manager)[0], [4, 4, 0, 0]);
+  assert.deepEqual(rowValues(manager), [4, 4, 2, 0]);
   assert.equal(manager.score, 4);
 });
 
