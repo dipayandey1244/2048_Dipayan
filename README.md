@@ -53,3 +53,15 @@ npm test
 
 The game engine tests run without a browser and use an injected random-number
 source so tile generation is reproducible.
+
+
+## 2048 FLUX features
+
+The FLUX interface adds selectable 4×4, 5×5 and 6×6 boards; English, Hindi,
+Bengali, Spanish, French and Japanese UI languages; four visual themes; undo;
+move hints; a deterministic daily challenge; optional merge sounds; local
+achievements; and a five-run personal leaderboard. Preferences and personal
+scores are stored locally in the browser.
+
+GitHub Pages can publish the static site directly from the `flux-development`
+branch using the repository root (`/`) as the publishing folder.
