@@ -69,3 +69,30 @@ body.theme-light .score-container,body.theme-light .best-container { color:var(-
   .flux-panel { padding:11px; }
 }
 @media(prefers-reduced-motion:reduce) { .tile,.tile-new .tile-inner,.tile-merged .tile-inner { animation:none!important; transition:none!important; } }
+
+/* Classic 2048 palette (the original warm theme) */
+body.theme-classic {
+  --flux-bg:#faf8ef; --flux-panel:#bbada0; --flux-board:#bbada0;
+  --flux-cell:rgba(238,228,218,.35); --flux-text:#776e65;
+  --flux-muted:#8f8277; --flux-accent:#8f7a66; --flux-border:rgba(119,110,101,.14);
+}
+body.theme-classic .built-by { color:#8f7a66; }
+body.theme-classic .built-by strong { color:#776e65; }
+body.theme-classic .score-container,body.theme-classic .best-container { background:#bbada0; color:#fff; border:0; }
+body.theme-classic .score-container:after,body.theme-classic .best-container:after { color:#eee4da; }
+body.theme-classic .flux-toolbar select,body.theme-classic .flux-actions button,
+body.theme-classic .flux-panel { background:#eee4da; color:#776e65; border-color:rgba(119,110,101,.12); }
+body.theme-classic .flux-panel h2,body.theme-classic .flux-status { color:#8f7a66; }
+body.theme-classic .restart-button,body.theme-classic .game-container .game-message a { background:#8f7a66; color:#f9f6f2; }
+body.theme-classic .tile.tile-2 .tile-inner { background:#eee4da; color:#776e65; }
+body.theme-classic .tile.tile-4 .tile-inner { background:#ede0c8; color:#776e65; }
+body.theme-classic .tile.tile-8 .tile-inner { background:#f2b179; color:#f9f6f2; }
+body.theme-classic .tile.tile-16 .tile-inner { background:#f59563; color:#f9f6f2; }
+body.theme-classic .tile.tile-32 .tile-inner { background:#f67c5f; color:#f9f6f2; }
+body.theme-classic .tile.tile-64 .tile-inner { background:#f65e3b; color:#f9f6f2; }
+body.theme-classic .tile.tile-128 .tile-inner { background:#edcf72; color:#f9f6f2; }
+body.theme-classic .tile.tile-256 .tile-inner { background:#edcc61; color:#f9f6f2; }
+body.theme-classic .tile.tile-512 .tile-inner { background:#edc850; color:#f9f6f2; }
+body.theme-classic .tile.tile-1024 .tile-inner { background:#edc53f; color:#f9f6f2; }
+body.theme-classic .tile.tile-2048 .tile-inner { background:#edc22e; color:#f9f6f2; }
+body.theme-classic .tile.tile-super .tile-inner { background:#3c3a32; color:#f9f6f2; }
