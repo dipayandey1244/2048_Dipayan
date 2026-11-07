@@ -66,9 +66,9 @@ function values(manager) {
 }
 
 function rowValues(manager, y = 0) {
-  return manager.grid.cells.map((column) =>
+  return JSON.parse(JSON.stringify(manager.grid.cells.map((column) =>
     column[y] ? column[y].value : 0
-  );
+  )));
 }
 
 test("new game starts with two tiles and deterministic values", () => {
