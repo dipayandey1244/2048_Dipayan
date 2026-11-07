@@ -11,10 +11,15 @@
   function byId(id){return document.getElementById(id);}
   function safeGet(key,fallback){try{return JSON.parse(localStorage.getItem(key))||fallback;}catch(e){return fallback;}}
   function safeSet(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch(e){}}
+  function formatNumber(value){
+    var locale=currentLanguage==="hi"?"hi-IN":currentLanguage==="bn"?"bn-BD":currentLanguage==="ja"?"ja-JP":currentLanguage==="fr"?"fr-FR":currentLanguage==="es"?"es-ES":"en-US";
+    try{return new Intl.NumberFormat(locale,{maximumFractionDigits:0}).format(Number(value));}
+    catch(error){return String(value);}
+  }
   function applyLanguage(code){
     currentLanguage=translations[code]?code:"en";
     var t=translations[currentLanguage]||translations.en;
-    document.documentElement.lang=code;
+    document.documentElement.lang=currentLanguage;
     document.querySelectorAll("[data-i18n]").forEach(function(el){var key=el.getAttribute("data-i18n");if(t[key])el.textContent=t[key];});
     document.querySelector(".score-container").setAttribute("data-label",t.score);
     document.querySelector(".best-container").setAttribute("data-label",t.best);
@@ -29,7 +34,7 @@
     var scores=safeGet("flux-leaderboard",[]);
     var board=byId("leaderboard-list");board.innerHTML="";
     if(!scores.length)scores=[{score:0,date:"Play a run to get on the board"}];
-    scores.slice(0,5).forEach(function(item){var li=document.createElement("li");li.textContent=item.score+" · "+item.date;board.appendChild(li);});
+    scores.slice(0,5).forEach(function(item){var li=document.createElement("li");li.textContent=formatNumber(item.score)+" · "+item.date;board.appendChild(li);});
   }
   function unlock(name){
     var items=safeGet("flux-achievements",[]);
@@ -59,6 +64,7 @@
   }
   window.FluxFeatures={
     t:function(key){return (translations[currentLanguage]||translations.en)[key]||key;},
+    formatNumber:formatNumber,
     init:function(instance){
       game=instance;
       var lang=safeGet("flux-language","en");
