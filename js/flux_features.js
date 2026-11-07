@@ -72,7 +72,7 @@
       safeSet("flux-theme","classic");
       byId("language").value=lang;byId("theme").value=theme;byId("board-size").value=String(game.size);
       document.body.className="theme-"+theme;applyLanguage(lang);renderLists();
-      byId("language").addEventListener("change",function(){applyLanguage(this.value);});
+      byId("language").addEventListener("change",function(){applyLanguage(this.value);if(game)game.actuate();});
       byId("theme").addEventListener("change",function(){document.body.className="theme-"+this.value;safeSet("flux-theme",this.value);});
       byId("board-size").addEventListener("change",function(){game.setBoardSize(this.value);byId("flux-status").textContent="New "+this.value+" × "+this.value+" game";});
       byId("undo-button").addEventListener("click",function(){var ok=game.undo();byId("flux-status").textContent=ok?"Last move undone":"Nothing to undo yet";});
