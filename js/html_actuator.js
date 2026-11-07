@@ -60,7 +60,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
   var size = this.cellSize;
   inner.className = "tile-inner";
-  inner.textContent = tile.value;
+  inner.textContent = window.FluxFeatures ? window.FluxFeatures.formatNumber(tile.value) : tile.value;
   wrapper.style.width = size + "px";
   wrapper.style.height = size + "px";
   inner.style.width = size + "px";
@@ -105,17 +105,17 @@ HTMLActuator.prototype.updateScore = function (score) {
   this.clearContainer(this.scoreContainer);
   var difference = score - this.score;
   this.score = score;
-  this.scoreContainer.textContent = this.score;
+  this.scoreContainer.textContent = window.FluxFeatures ? window.FluxFeatures.formatNumber(this.score) : this.score;
   if (difference > 0) {
     var addition = document.createElement("div");
     addition.classList.add("score-addition");
-    addition.textContent = "+" + difference;
+    addition.textContent = "+" + (window.FluxFeatures ? window.FluxFeatures.formatNumber(difference) : difference);
     this.scoreContainer.appendChild(addition);
   }
 };
 
 HTMLActuator.prototype.updateBestScore = function (bestScore) {
-  this.bestContainer.textContent = bestScore;
+  this.bestContainer.textContent = window.FluxFeatures ? window.FluxFeatures.formatNumber(bestScore) : bestScore;
 };
 
 HTMLActuator.prototype.message = function (won) {
