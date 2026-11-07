@@ -135,9 +135,9 @@ test("the game ends when a move fills the last cell without creating a merge", (
   const { manager, storage } = createManager(4, [0.95, 0]);
   const pattern = [
     [null, 8, 2, 8],
-    [4, 2, 8, 2],
-    [2, 8, 4, 8],
-    [8, 2, 8, 4]
+    [4, 8, 2, 8],
+    [8, 4, 8, 2],
+    [4, 8, 2, 4]
   ];
   pattern.forEach((row, y) => row.forEach((value, x) => {
     if (value !== null) manager.grid.insertTile(new Tile({ x, y }, value));
