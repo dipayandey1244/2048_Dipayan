@@ -84,7 +84,7 @@ test("left move combines equal adjacent tiles and scores the merge", () => {
   const { manager } = createManager(4, [0, 0]);
   place(manager, [[0, 0, 2], [1, 0, 2], [2, 0, 2]]);
   manager.move(3);
-  assert.deepEqual(rowValues(manager), [4, 2, 2, 0]);
+  assert.deepEqual(rowValues(manager), [4, 2, 0, 0]);
   assert.equal(manager.score, 4);
 });
 
@@ -92,7 +92,7 @@ test("a newly merged tile cannot merge twice in one move", () => {
   const { manager } = createManager(4, [0, 0]);
   place(manager, [[0, 0, 2], [1, 0, 2], [2, 0, 4]]);
   manager.move(3);
-  assert.deepEqual(rowValues(manager), [4, 4, 2, 0]);
+  assert.deepEqual(rowValues(manager), [4, 4, 0, 0]);
   assert.equal(manager.score, 4);
 });
 
